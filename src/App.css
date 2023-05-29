@@ -1,31 +1,44 @@
-.App {
-  text-align: center;
+.board button {
+  margin: 2px;
+  width: 70px;
+  height: 70px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.board button.toggle {
+  margin: 2px;
+  width: 181px;
+  height: 70px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.player-score {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+}
+
+.player-score.active {
+  background-color: lightgreen;
+}
+
+.player-score.active div.active {
+  background-color: green;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.player-score input {
+  max-width: 150px;
 }
 
-.heart {
-  color: #ff0000;
+.player-score-round-cell {
+  margin: 5px;
+  padding: 0 5px;
+  border: 1px solid white;
 }
 
-.small {
-  font-size: 0.75rem;
+.player-score-round-result {
+  
+  margin: 5px;
+  padding: 0 5px;
+  border: 1px solid red;
 }
