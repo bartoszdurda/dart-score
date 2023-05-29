@@ -19,8 +19,15 @@ function Board({onScore}) {
         onScore(score);
     }
 
-    function onToggleClick() {
+    function onToggleClick(modifier) {
+        if(modifier == 2) {
 
+            setIsDouble(true);
+            setIsTriple(false);
+        } else if(modifier == 3) {
+            setIsDouble(false);
+            setIsTriple(true);
+        }
     }
 
     return (
@@ -53,10 +60,10 @@ function Board({onScore}) {
                 <button className="btn btn-primary" onClick={onNumberClick}>20</button>
             </div>
             <div className="d-flex justify-content-center">
-                <button className="btn btn-warning">25</button>
-                <button className="btn btn-warning">50</button>
-                <button className={"btn toggle " + (isDouble ? "btn-secondary" : "btn-success")} onClick={() => setIsDouble(true)}>DOUBLE</button>
-                <button className={"btn toggle " + (isTriple ? "btn-secondary" : "btn-success")} onClick={() => setIsTriple(true)}>TRIPLE</button>
+                <button className="btn btn-warning" onClick={onNumberClick}>25</button>
+                <button className="btn btn-warning" onClick={onNumberClick}>50</button>
+                <button className={"btn toggle " + (isDouble ? "btn-secondary" : "btn-success")} onClick={() => onToggleClick(2)}>DOUBLE</button>
+                <button className={"btn toggle " + (isTriple ? "btn-secondary" : "btn-success")} onClick={() => onToggleClick(3)}>TRIPLE</button>
             </div>
         </div>
     )

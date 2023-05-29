@@ -112,6 +112,10 @@ function App() {
   }
 
   function onUndo() {
+    if(scoreboardHistory.length === 0) {
+      return;
+    }
+
     let updatedScoreboardHistory = structuredClone(scoreboardHistory);
 
     const lastScoreboardState = updatedScoreboardHistory.pop();
