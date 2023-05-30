@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Board from './components/Board';
 import PlayerScore from './components/PlayerScore';
 import { useState } from 'react';
+import { Fireworks } from '@fireworks-js/react'
 
 function App() {
   const initialState = {
@@ -11,7 +12,11 @@ function App() {
       round: 0,
       move: 0
     },
-    players: [
+    players: getPlayers()
+  };
+
+  function getPlayers() {
+    let players = [
       {
         id: 0,
         name: 'Bartek',
@@ -60,11 +65,19 @@ function App() {
           [0, 0, 0, 0]
         ]
       }
-    ]
-  };
+    ];
+
+    players = players.sort((a, b) => 0.5 - Math.random());
+    for(let i = 0; i < 4; i++) {
+      players[i].id = i;
+    }
+
+    return players;
+  }
 
   const [scoreboardHistory, setScoreboardHistory] = useState([]);
   const [scoreboard, setScoreboard] = useState(initialState);
+  const [fireworks, setFireworks] = useState(false);
 
   function onScore(score) {
     let updatedScoreboardHistory = structuredClone(scoreboardHistory);
@@ -78,22 +91,28 @@ function App() {
 
     const currentMove = scoreboard.gameState.move;
     const nextMove = getNextMove(currentMove);
-    
+
     const currentPlayerId = scoreboard.gameState.player;
     let nextPlayerId = currentPlayerId;
 
-    if(nextMove == 0) {
+    if (nextMove == 0) {
       nextPlayerId = getNextPlayerId(currentPlayerId, scoreboard.players.length);
 
-      if(nextPlayerId == 0) {
+      if (nextPlayerId == 0) {
         nextRound++;
       }
+    }
+
+    console.log([nextPlayerId, nextRound, nextMove]);
+
+    if(nextPlayerId == 0 && nextRound == 5 && nextMove == 0) {
+      setFireworks(true);
     }
 
     let currentPlayersScoreboard = structuredClone(scoreboard.players);
 
     let currentPlayerScoreboard = structuredClone(scoreboard.players[currentPlayerId]);
-    
+
     currentPlayerScoreboard.rounds[currentRound][currentMove] = score;
     currentPlayerScoreboard.rounds[currentRound][3] += score;
     currentPlayerScoreboard.overall += score;
@@ -101,18 +120,19 @@ function App() {
 
     console.log(currentPlayerScoreboard);
 
-    updatedScoreboard.gameState = {player: nextPlayerId, round: nextRound, move: nextMove};
+    updatedScoreboard.gameState = { player: nextPlayerId, round: nextRound, move: nextMove };
     updatedScoreboard.players = currentPlayersScoreboard;
 
     setScoreboard(updatedScoreboard);
   }
 
   function onReset() {
+    setFireworks(false);
     setScoreboard(initialState);
   }
 
   function onUndo() {
-    if(scoreboardHistory.length === 0) {
+    if (scoreboardHistory.length === 0) {
       return;
     }
 
@@ -124,7 +144,7 @@ function App() {
   }
 
   function getNextPlayerId(currentPlayerId, playersCount) {
-    if(currentPlayerId < playersCount - 1) {
+    if (currentPlayerId < playersCount - 1) {
       return currentPlayerId + 1;
     }
 
@@ -132,7 +152,7 @@ function App() {
   }
 
   function getNextMove(currentMove) {
-    if(currentMove < 2) {
+    if (currentMove < 2) {
       return currentMove + 1;
     }
 
@@ -141,17 +161,17 @@ function App() {
 
   return (
     <div className="App">
-      <div className="d-flex justify-content-center align-items-center mb-4">
-        <button className="btn btn-sm btn-success me-3" onClick={onUndo}>UNDO</button>
-        <h1 className="">DART SCOREBOARD</h1>
-        <button className="btn btn-sm btn-danger ms-3" onClick={onReset}>RESET</button>
-      </div>
       <div className="row align-items-center">
         <div className="col-12 col-md-3">
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[0]}></PlayerScore>
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[1]}></PlayerScore>
         </div>
         <div className="col-12 col-md-6">
+          <div className="d-flex justify-content-center align-items-center mb-4">
+            <button className="btn btn-sm btn-success me-3" onClick={onUndo}>UNDO</button>
+            <h1 className="">DART SCOREBOARD</h1>
+            <button className="btn btn-sm btn-danger ms-3" onClick={onReset}>RESET</button>
+          </div>
           <Board onScore={onScore}></Board>
         </div>
         <div className="col-12 col-md-3">
