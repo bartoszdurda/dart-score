@@ -6,8 +6,6 @@ name: build-and-deploy-on-pages
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 permissions:
   contents: read
