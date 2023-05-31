@@ -5,6 +5,7 @@ import PlayerScore from './components/PlayerScore';
 import { useState } from 'react';
 
 function App() {
+  
   const initialState = {
     gameState: {
       player: 0,
