@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Board from './components/Board';
 import PlayerScore from './components/PlayerScore';
 import { useState } from 'react';
-import { Fireworks } from '@fireworks-js/react'
 
 function App() {
   const initialState = {
@@ -77,7 +76,6 @@ function App() {
 
   const [scoreboardHistory, setScoreboardHistory] = useState([]);
   const [scoreboard, setScoreboard] = useState(initialState);
-  const [fireworks, setFireworks] = useState(false);
 
   function onScore(score) {
     let updatedScoreboardHistory = structuredClone(scoreboardHistory);
@@ -105,10 +103,6 @@ function App() {
 
     console.log([nextPlayerId, nextRound, nextMove]);
 
-    if(nextPlayerId === 0 && nextRound === 5 && nextMove === 0) {
-      setFireworks(true);
-    }
-
     let currentPlayersScoreboard = structuredClone(scoreboard.players);
 
     let currentPlayerScoreboard = structuredClone(scoreboard.players[currentPlayerId]);
@@ -127,7 +121,6 @@ function App() {
   }
 
   function onReset() {
-    setFireworks(false);
     setScoreboard(initialState);
   }
 

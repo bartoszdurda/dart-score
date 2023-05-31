@@ -20,11 +20,11 @@ function Board({onScore}) {
     }
 
     function onToggleClick(modifier) {
-        if(modifier == 2) {
+        if(modifier === 2) {
 
             setIsDouble(true);
             setIsTriple(false);
-        } else if(modifier == 3) {
+        } else if(modifier === 3) {
             setIsDouble(false);
             setIsTriple(true);
         }
