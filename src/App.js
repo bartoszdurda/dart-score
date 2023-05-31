@@ -5,7 +5,7 @@ import PlayerScore from './components/PlayerScore';
 import { useState } from 'react';
 
 function App() {
-  
+
   const initialState = {
     gameState: {
       player: 0,
@@ -154,9 +154,9 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App container-fluid">
       <div className="row align-items-center">
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 ps-0">
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[0]}></PlayerScore>
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[1]}></PlayerScore>
         </div>
@@ -168,7 +168,7 @@ function App() {
           </div>
           <Board onScore={onScore}></Board>
         </div>
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 pe-0">
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[2]}></PlayerScore>
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[3]}></PlayerScore>
         </div>
