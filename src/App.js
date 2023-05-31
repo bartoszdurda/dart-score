@@ -95,17 +95,17 @@ function App() {
     const currentPlayerId = scoreboard.gameState.player;
     let nextPlayerId = currentPlayerId;
 
-    if (nextMove == 0) {
+    if (nextMove === 0) {
       nextPlayerId = getNextPlayerId(currentPlayerId, scoreboard.players.length);
 
-      if (nextPlayerId == 0) {
+      if (nextPlayerId === 0) {
         nextRound++;
       }
     }
 
     console.log([nextPlayerId, nextRound, nextMove]);
 
-    if(nextPlayerId == 0 && nextRound == 5 && nextMove == 0) {
+    if(nextPlayerId === 0 && nextRound === 5 && nextMove === 0) {
       setFireworks(true);
     }
 
