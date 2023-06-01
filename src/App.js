@@ -163,7 +163,7 @@ function App() {
         <div className="col-12 col-md-6">
           <div className="d-flex justify-content-center align-items-center mb-4">
             <button className="btn btn-sm btn-success me-3" onClick={onUndo}>UNDO</button>
-            <h1 className="">DART SCOREBOARD</h1>
+            <h1 className="">DART</h1>
             <button className="btn btn-sm btn-danger ms-3" onClick={onReset}>RESET</button>
           </div>
           <Board onScore={onScore}></Board>
