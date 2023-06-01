@@ -1,5 +1,5 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 import Board from './components/Board';
 import PlayerScore from './components/PlayerScore';
 import { useState } from 'react';
@@ -160,7 +160,7 @@ function App() {
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[0]}></PlayerScore>
           <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[1]}></PlayerScore>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 p-0">
           <div className="d-flex justify-content-center align-items-center mb-4">
             <button className="btn btn-sm btn-success me-3" onClick={onUndo}>UNDO</button>
             <h1 className="">DART</h1>
