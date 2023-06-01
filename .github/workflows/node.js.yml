@@ -30,7 +30,7 @@ jobs:
     - name: 'Create env file'
       run:
         touch .env
-        echo PUBLIC_URL=. >> .env
+        echo PUBLIC_URL=https://bartoszdurda.github.io/dart-score >> .env
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
