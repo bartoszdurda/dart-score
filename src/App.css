@@ -2,6 +2,13 @@ body {
   font-family: 'Montserrat', 'Courier New', Courier, monospace;
   background-color: #292929;
   color: #fff;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .board button {
