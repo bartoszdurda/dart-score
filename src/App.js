@@ -79,6 +79,7 @@ function App() {
   const [scoreboard, setScoreboard] = useState(initialState);
 
   function onScore(score) {
+    console.log("innn")
     let updatedScoreboardHistory = structuredClone(scoreboardHistory);
     updatedScoreboardHistory.push(structuredClone(scoreboard));
     setScoreboardHistory(updatedScoreboardHistory);
@@ -97,7 +98,9 @@ function App() {
     if (nextMove === 0) {
       nextPlayerId = getNextPlayerId(currentPlayerId, scoreboard.players.length, scoreboard.players);
 
-      if (nextPlayerId === 0) {
+      if (nextPlayerId === 0 && !scoreboard.gameState.player.disable) {
+        nextRound++;
+      }else if(nextPlayerId === 1 && scoreboard.players[0].disable){
         nextRound++;
       }
     }
