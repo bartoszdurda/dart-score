@@ -95,7 +95,7 @@ function App() {
     let nextPlayerId = currentPlayerId;
 
     if (nextMove === 0) {
-      nextPlayerId = getNextPlayerId(currentPlayerId, scoreboard.players.length);
+      nextPlayerId = getNextPlayerId(currentPlayerId, scoreboard.players.length, scoreboard.players);
 
       if (nextPlayerId === 0) {
         nextRound++;
@@ -137,13 +137,16 @@ function App() {
     setScoreboard(lastScoreboardState);
   }
 
-  function getNextPlayerId(currentPlayerId, playersCount) {
-    if (currentPlayerId < playersCount - 1) {
-      return currentPlayerId + 1;
+  function getNextPlayerId(currentPlayerId, playersCount, players) {
+    for (let i = 1; i <= playersCount; i++) {
+      const nextPlayerId = (currentPlayerId + i) % playersCount;
+      if (!players[nextPlayerId].disable) {
+        return nextPlayerId;
+      }
     }
-
+  
     return 0;
-  }
+  }  
 
   function getNextMove(currentMove) {
     if (currentMove < 2) {
@@ -157,8 +160,8 @@ function App() {
     <div className="App container-fluid">
       <div className="row align-items-center">
         <div className="col-12 col-md-3 ps-0">
-          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[0]}></PlayerScore>
-          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[1]}></PlayerScore>
+          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[0]} scoreboard={scoreboard} getNextPlayerId={getNextPlayerId} setScoreboard={setScoreboard}/>
+          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[1]} scoreboard={scoreboard} getNextPlayerId={getNextPlayerId} setScoreboard={setScoreboard}/>
         </div>
         <div className="col-12 col-md-6 p-0">
           <div className="d-flex justify-content-center align-items-center mb-4">
@@ -169,8 +172,8 @@ function App() {
           <Board onScore={onScore}></Board>
         </div>
         <div className="col-12 col-md-3 pe-0">
-          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[2]}></PlayerScore>
-          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[3]}></PlayerScore>
+          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[2]} scoreboard={scoreboard} getNextPlayerId={getNextPlayerId} setScoreboard={setScoreboard}/>
+          <PlayerScore gameState={scoreboard.gameState} playerData={scoreboard.players[3]} scoreboard={scoreboard} getNextPlayerId={getNextPlayerId} setScoreboard={setScoreboard}/>
         </div>
       </div>
     </div>
